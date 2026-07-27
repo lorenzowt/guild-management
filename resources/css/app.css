@@ -7,3 +7,74 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+@import "tailwindcss";
+
+@import "tailwindcss";
+
+@theme {
+  /* Sky Blue */
+  --color-sky-blue-50: #edf6ff;
+  --color-sky-blue-100: #daedff;
+  --color-sky-blue-200: #c8e4ff;
+  --color-sky-blue-300: #b6dcff;
+  --color-sky-blue-400: #a2d2ff;
+  --color-sky-blue: #a2d2ff;
+  --color-sky-blue-500: #a2d2ff;
+  --color-sky-blue-600: #50aaff;
+  --color-sky-blue-700: #0082fb;
+  --color-sky-blue-800: #0056a7;
+  --color-sky-blue-900: #002b54;
+
+  /* Icy Blue */
+  --color-icy-blue-50: #f2f9ff;
+  --color-icy-blue-100: #e5f3ff;
+  --color-icy-blue-200: #d8ecfe;
+  --color-icy-blue-300: #cbe6fe;
+  --color-icy-blue-400: #bde0fe;
+  --color-icy-blue: #bde0fe;
+  --color-icy-blue-500: #bde0fe;
+  --color-icy-blue-600: #66b6fd;
+  --color-icy-blue-700: #0f8dfb;
+  --color-icy-blue-800: #035eaf;
+  --color-icy-blue-900: #012f57;
+
+  /* Pastel Petal */
+  --color-pastel-petal-50: #fff4f8;
+  --color-pastel-petal-100: #ffe9f1;
+  --color-pastel-petal-200: #ffddea;
+  --color-pastel-petal-300: #ffd2e3;
+  --color-pastel-petal-400: #ffc8dd;
+  --color-pastel-petal: #ffc8dd;
+  --color-pastel-petal-500: #ffc8dd;
+  --color-pastel-petal-600: #ff6ca4;
+  --color-pastel-petal-700: #ff116c;
+  --color-pastel-petal-800: #b60046;
+  --color-pastel-petal-900: #5b0023;
+
+  /* Baby Pink */
+  --color-baby-pink-50: #ffeff5;
+  --color-baby-pink-100: #ffdeea;
+  --color-baby-pink-200: #ffcee0;
+  --color-baby-pink-300: #ffbed6;
+  --color-baby-pink-400: #ffafcc;
+  --color-baby-pink: #ffafcc;
+  --color-baby-pink-500: #ffafcc;
+  --color-baby-pink-600: #ff5895;
+  --color-baby-pink-700: #ff025f;
+  --color-baby-pink-800: #ab003f;
+  --color-baby-pink-900: #56001f;
+
+  /* Thistle */
+  --color-thistle-50: #f5f0f8;
+  --color-thistle-100: #ebe1f0;
+  --color-thistle-200: #e0d2e9;
+  --color-thistle-300: #d6c2e2;
+  --color-thistle-400: #cdb4db;
+  --color-thistle: #cdb4db;
+  --color-thistle-500: #cdb4db;
+  --color-thistle-600: #a87ec1;
+  --color-thistle-700: #824ea1;
+  --color-thistle-800: #57346b;
+  --color-thistle-900: #2b1a36;
+}

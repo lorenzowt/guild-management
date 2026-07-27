@@ -20,7 +20,7 @@ class HeroController extends Controller
      */
     public function create()
     {
-        //
+        return view('heroes.create');
     }
 
     /**
@@ -28,7 +28,18 @@ class HeroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->merge([
+            'name' => preg_replace('/\s+/', ' ', trim($request->name)),
+        ]);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'hero_class' => 'required|in:warrior,cleric,mage,rogue',
+        ]);
+
+        $hero = Hero::create($validated);
+
+        return redirect()->route('heroes.show', $hero);
     }
 
     /**
