@@ -15,12 +15,12 @@
             </style>
         @endif
     </head>
-    <body class="min-h-screen bg-white">
-        <div class="min-h-screen  bg-baby-pink-900/10 flex">
+    <body class="min-h-screen bg-background-500">
+        <div class="min-h-screen flex">
 
             @include('partials.sidebar')
 
-            <div class=" flex flex-col flex-1 pt-5 px-5">
+            <div class=" pb-4 pr-4 flex flex-col flex-1">
 
                 @include('partials.topbar')
 

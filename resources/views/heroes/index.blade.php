@@ -1,30 +1,101 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
-
 @section('content')
-<div class="flex md:flex-row flex-col  justify-around pt-10">
-    <div class ="bg-white mx-auto max-w-2xl w-full h-fit rounded-md shadow-md p-10">
-        <h2 class="tracking-tight font-medium text-3xl mb-7"> List Heroes </h2>
-        @if($heroes->isEmpty())
-        <div class="flex flex-col w-full justify-center items-center">
-            <p class="bg-pastel-petal-900/4 p-5 text-pastel-petal-900/40 rounded-lg font-semibold">No units hired yet</p>
-            <a class=" mt-2 text-pastel-petal-900/70 underline underline-offset-6"href="{{ route('heroes.create') }}">create a hero </a>
-        </div>
-        @else
-        @foreach($heroes as $hero)
-        <div class="flex items-center justify-between py-5 border-t" >
-            <div class="flex-col">
-                <p class="text-lg">{{ $hero->name }}</p>
-                <p class="text-sm">Status: {{ $hero->status }}</p>
-            </div>
-            <div class="flex gap-5">
-                <p>Heal</p>
-                <p>Erase</p>
-            </div>
-        </div>
-        @endforeach
-        @endif
+<section class="flex flex-col min-h-full bg-surface-500 rounded-xl px-5 pt-3 pb-5 gap-10">
+    <div class="pb-2 px-4 border-m border-b border-accent-500">
+        <p class="text-text-400 text-sm">Hero Management</p>
     </div>
-</div>
+    <div class="mx-auto min-w-6xl flex flex-col gap-6">
+        <div class="flex items-center justify-between gap-4 px-4">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight text-text-500">
+                    Your Roaster
+                </h1>
+                <p class="mt-2 text-sm text-text-500">
+                    Manage the heroes currently in your guild and hire new units.
+                </p>
+            </div>
+            <a
+                href="{{ route('heroes.create') }}"
+                class="rounded-xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-text-400/30 transition hover:bg-primary-700"
+            >
+                + Hire units
+            </a>
+        </div>    
+        <div class="overflow-hidden rounded-3xl border border-[#eee6f0] bg-white shadow-lg shadow-text-400/30 font-body">
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-180 text-left">
+                    <thead class="bg-primary-50">
+                        <tr class="border-b border-[#eee6f0] font-extrabold uppercase tracking-tight text-text-400 text-xs">
+                            <th class="px-7 py-5">
+                                Name
+                            </th>
+                            <th class="px-6 py-5">
+                                Class
+                            </th>
+                            <th class="px-6 py-5">
+                                Level
+                            </th>
+                            <th class="px-6 py-5">
+                                Status
+                            </th>
+                            <th class="px-7 py-5 text-right">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y divide-accent-300">
+                        @foreach ($heroes as $hero)
+                            <tr class="transition hover:bg-accent-100 bg-white font-body">
+                                <td class="px-7 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100 text-sm font-bold text-accent-800">
+                                            {{ strtoupper(substr($hero->name, 0, 1)) }}
+                                        </div>
+
+                                        <span class=" font-semibold  text-text-500">
+                                            {{ $hero->name }}
+                                        </span>
+                                    </div>
+                                </td>
+
+                                <td class="px-6 py-5 text-sm font-medium text-text-500">
+                                    {{ $hero->hero_class->value }}
+                                </td>
+
+                                <td class="px-6 py-5 text-sm font-medium text-text-500">
+                                    level {{ $hero->level }}
+                                </td>
+
+                                <td class="px-6 py-5 text-xs font-medium text-text-500">
+                                        {{ $hero->status->value }}
+                                </td>
+
+                                <td class="px-7 py-5">
+                                    <div class="flex justify-end gap-2">
+                                        <button
+                                            type="button"
+                                            class="rounded-lg bg-secondary-300 px-3.5 py-2 text-xs font-bold tracking-wide shadow-sm text-secondary-800 transition hover:bg-secondary-500 hover:text-secondary-900"
+                                        >
+                                            Cure
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            class="rounded-lg bg-danger-300/80 px-3.5 py-2 text-xs font-bold tracking-wide shadow-sm text-danger-700 transition hover:bg-danger-500/80 hover:text-danger-800"
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection
+

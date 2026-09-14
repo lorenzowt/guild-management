@@ -1,4 +1,6 @@
-@import 'tailwindcss';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -77,4 +79,134 @@
   --color-thistle-700: #824ea1;
   --color-thistle-800: #57346b;
   --color-thistle-900: #2b1a36;
+}
+
+@import "tailwindcss";
+
+@theme {
+    /* Primary — #D88DB1 */
+    --color-primary-50: #FDF7FA;
+    --color-primary-100: #FAEDF3;
+    --color-primary-200: #F4DCE7;
+    --color-primary-300: #ECC3D5;
+    --color-primary-400: #E4A8C2;
+    --color-primary-500: #D88DB1;
+    --color-primary-600: #C9789F;
+    --color-primary-700: #B56289;
+    --color-primary-800: #984D71;
+    --color-primary-900: #7B3D5A;
+    --color-primary-950: #512638;
+
+    /* Secondary — #C9C1DC */
+    --color-secondary-50: #FAF9FC;
+    --color-secondary-100: #F3F0F8;
+    --color-secondary-200: #E9E5F1;
+    --color-secondary-300: #DDD7E9;
+    --color-secondary-400: #D3CBE2;
+    --color-secondary-500: #C9C1DC;
+    --color-secondary-600: #B2A7CB;
+    --color-secondary-700: #998DB6;
+    --color-secondary-800: #7E709B;
+    --color-secondary-900: #635779;
+    --color-secondary-950: #41384F;
+
+    /* Accent — #E5DAE0 */
+    --color-accent-50: #FDFCFC;
+    --color-accent-100: #FAF7F9;
+    --color-accent-200: #F3EDF0;
+    --color-accent-300: #EDE4E9;
+    --color-accent-400: #E9DFE4;
+    --color-accent-500: #E5DAE0;
+    --color-accent-600: #D3C4CC;
+    --color-accent-700: #BBA8B3;
+    --color-accent-800: #9C8793;
+    --color-accent-900: #7D6874;
+    --color-accent-950: #523F49;
+
+    /* Background — #F4EFF2 */
+    --color-background-50: #FEFDFE;
+    --color-background-100: #FBF9FA;
+    --color-background-200: #F8F4F6;
+    --color-background-300: #F6F1F4;
+    --color-background-400: #F5F0F3;
+    --color-background-500: #F4EFF2;
+    --color-background-600: #DED7DB;
+    --color-background-700: #C3B9BF;
+    --color-background-800: #A2989E;
+    --color-background-900: #82777D;
+    --color-background-950: #554C51;
+
+    /* Surface — #FFFFFF */
+    --color-surface-50: #FFFFFF;
+    --color-surface-100: #FEFEFE;
+    --color-surface-200: #FCFCFC;
+    --color-surface-300: #FAFAFA;
+    --color-surface-400: #F7F7F7;
+    --color-surface-500: #FFFFFF;
+    --color-surface-600: #E6E6E6;
+    --color-surface-700: #CCCCCC;
+    --color-surface-800: #AFAFAF;
+    --color-surface-900: #8F8F8F;
+    --color-surface-950: #5C5C5C;
+}
+
+@theme
+{
+    --font-heading: "Plus Jakarta Sans", sans-serif;
+    --font-body: "Inter", sans-serif;
+}
+
+@theme {
+    --color-text-50: #F9F6F8;
+    --color-text-100: #EFE7EB;
+    --color-text-200: #DED0D7;
+    --color-text-300: #C0A9B4;
+    --color-text-400: #947283;
+    --color-text-500: #4F3644;
+    --color-text-600: #452F3B;
+    --color-text-700: #3B2933;
+    --color-text-800: #302129;
+    --color-text-900: #24181F;
+    --color-text-950: #160E13;
+}
+
+@theme {
+    /* Success — #B8D4C0 */
+    --color-success-50: #F5F9F6;
+    --color-success-100: #E9F2EC;
+    --color-success-200: #DCEAE0;
+    --color-success-300: #CCE0D2;
+    --color-success-400: #C2D9C9;
+    --color-success-500: #B8D4C0;
+    --color-success-600: #91B69D;
+    --color-success-700: #6E967B;
+    --color-success-800: #52765F;
+    --color-success-900: #3B5845;
+    --color-success-950: #24382B;
+
+    /* Warning — #EBCB91 */
+    --color-warning-50: #FEFAF3;
+    --color-warning-100: #FCF4E4;
+    --color-warning-200: #F8EBD0;
+    --color-warning-300: #F3DEB5;
+    --color-warning-400: #EFD4A3;
+    --color-warning-500: #EBCB91;
+    --color-warning-600: #D3AA64;
+    --color-warning-700: #B18843;
+    --color-warning-800: #8B682F;
+    --color-warning-900: #684D25;
+    --color-warning-950: #403017;
+
+    /* Danger — #D99494 */
+    --color-danger-50: #FDF8F8;
+    --color-danger-100: #FAEDED;
+    --color-danger-200: #F5DEDE;
+    --color-danger-300: #EECACA;
+    --color-danger-400: #E4AFAF;
+    --color-danger-500: #D99494;
+    --color-danger-600: #C57575;
+    --color-danger-700: #A95858;
+    --color-danger-800: #873F3F;
+    --color-danger-900: #663030;
+    --color-danger-950: #3F1D1D;
 }
