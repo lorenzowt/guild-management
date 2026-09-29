@@ -60,9 +60,13 @@
                                             {{ strtoupper(substr($hero->name, 0, 1)) }}
                                         </div>
 
-                                        <span class=" font-semibold  text-text-500">
+                                        <button
+                                        type="button" 
+                                        class="hero-show-button font-semibold  text-text-500 hover:text-primary-600 transition"
+                                        data-url="{{ route('heroes.show', $hero) }}"
+                                        >
                                             {{ $hero->name }}
-                                        </span>
+                                        </button>
                                     </div>
                                 </td>
 
@@ -106,6 +110,7 @@
         </div>
     </div>
     @include('heroes._create-modal')
+    @include('heroes._show-modal')
 </section>
 @endsection
 
