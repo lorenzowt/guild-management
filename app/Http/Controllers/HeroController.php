@@ -82,7 +82,10 @@ class HeroController extends Controller
 
         $hero->update($validated);
 
-        return redirect()->route('heroes.index');
+        return response()->json([
+            'success' => true,
+            'show_url' => route('heroes.show', $hero),
+            ]);
     }
 
     /**

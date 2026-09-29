@@ -78,3 +78,33 @@ editModalContainer.addEventListener('click', function(event) {
         editModal.classList.add('hidden');
     }
 });
+
+editModalContainer.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const url = form.action;
+    const formData = new FormData(form);
+    fetch(url, {
+        method: 'POST',
+        body: formData
+    })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            if(data.success) {
+                const editModal = document.getElementById('edit-hero-modal');
+
+                fetch(data.show_url)
+                    .then(function(response) {
+                        return response.text();
+                    })
+                    .then(function(html) {
+                        showModalBody.innerHTML = html;
+                        showModal.classList.remove('hidden');
+                        editModal.classList.add('hidden');
+                    });
+            }
+        });
+});
