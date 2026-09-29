@@ -4,7 +4,16 @@ namespace App\Enums;
 
 enum HeroStatus: string
 {
-    case Available = 'available';
-    case OnMission = 'on_mission';
-    case Injured = 'injured';
+    case AVAILABLE = 'available';
+    case ON_MISSION = 'on_mission';
+    case INJURED = 'injured';
+
+    public function label()
+    {
+        return match($this){
+            self::AVAILABLE => 'Available',
+            self::ON_MISSION => 'On Mission',
+            self::INJURED => 'injured',
+        };
+    }
 }
