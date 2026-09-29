@@ -50,7 +50,9 @@ class HeroController extends Controller
      */
     public function show(Hero $hero)
     {
-        //
+        return view('heroes._show-modal', [
+            'hero' => $hero,
+        ]);
     }
 
     /**
