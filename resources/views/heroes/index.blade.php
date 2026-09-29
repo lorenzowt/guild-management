@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+@vite('resources/js/heroes.js')
+@if ($errors->any())
+    <script>
+        window.openCreateHeroModal = true;
+    </script>
+@endif
 <section class="flex flex-col min-h-full bg-surface-500 rounded-xl px-5 pt-3 pb-5 gap-10">
     <div class="pb-2 px-4 border-m border-b border-accent-500">
         <p class="text-text-400 text-sm">Hero Management</p>
@@ -15,12 +21,12 @@
                     Manage the heroes currently in your guild and hire new units.
                 </p>
             </div>
-            <a
-                href="{{ route('heroes.create') }}"
-                class="rounded-xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-text-400/30 transition hover:bg-primary-700"
+            <button
+                id="create-hero-button"
+                class="rounded-xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-text-400/30 transition hover:bg-primary-700"                
             >
                 + Hire units
-            </a>
+            </button>
         </div>    
         <div class="overflow-hidden rounded-3xl border border-[#eee6f0] bg-white shadow-lg shadow-text-400/30 font-body">
             <div class="overflow-x-auto">
@@ -48,7 +54,7 @@
                     <tbody class="divide-y divide-accent-300">
                         @foreach ($heroes as $hero)
                             <tr class="transition hover:bg-accent-100 bg-white font-body">
-                                <td class="px-7 py-5">
+                                <td class="px-7 py-4">
                                     <div class="flex items-center gap-3">
                                         <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100 text-sm font-bold text-accent-800">
                                             {{ strtoupper(substr($hero->name, 0, 1)) }}
@@ -60,19 +66,19 @@
                                     </div>
                                 </td>
 
-                                <td class="px-6 py-5 text-sm font-medium text-text-500">
+                                <td class="px-6 py-4 text-sm font-medium text-text-500">
                                     {{ $hero->hero_class->value }}
                                 </td>
 
-                                <td class="px-6 py-5 text-sm font-medium text-text-500">
+                                <td class="px-6 py-4 text-sm font-medium text-text-500">
                                     level {{ $hero->level }}
                                 </td>
 
-                                <td class="px-6 py-5 text-xs font-medium text-text-500">
+                                <td class="px-6 py-4 text-xs font-medium text-text-500">
                                         {{ $hero->status->value }}
                                 </td>
 
-                                <td class="px-7 py-5">
+                                <td class="px-7 py-4">
                                     <div class="flex justify-end gap-2">
                                         <button
                                             type="button"
@@ -95,7 +101,11 @@
                 </table>
             </div>
         </div>
+        <div class="hero-pagination">
+            {{ $heroes->links() }}
+        </div>
     </div>
+    @include('heroes._create-modal')
 </section>
 @endsection
 

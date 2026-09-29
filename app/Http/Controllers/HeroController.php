@@ -14,7 +14,7 @@ class HeroController extends Controller
     public function index()
     {
         return view('heroes.index', [
-            'heroes' => Hero::all(),
+            'heroes' => Hero::paginate(7),
         ]);
     }
 
@@ -36,13 +36,13 @@ class HeroController extends Controller
         ]);
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:10',
             'hero_class' => 'required|in:warrior,cleric,mage,rogue',
         ]);
 
-        $hero = Hero::create($validated);
+        Hero::create($validated);
 
-        return redirect()->route('heroes.show', $hero);
+        return redirect()->route('heroes.index');
     }
 
     /**

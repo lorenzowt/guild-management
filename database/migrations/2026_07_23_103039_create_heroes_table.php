@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('hero_class', 50);
             $table->unsignedTinyInteger('level')->default(1);
-            $table->string('status', 20)->default(HeroStatus::Available->value);
-
+            $table->string('status', 20)->default(HeroStatus::AVAILABLE->value);
             $table->timestamps();
         });
     }

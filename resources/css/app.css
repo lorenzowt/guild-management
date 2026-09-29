@@ -210,3 +210,48 @@
     --color-danger-900: #663030;
     --color-danger-950: #3F1D1D;
 }
+.hero-pagination nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-pagination nav p {
+    color: var(--color-text-600);
+}
+
+.hero-pagination nav a {
+    color: var(--color-text-500);
+    background-color: white;
+    border-color: var(--color-accent-300);
+}
+
+.hero-pagination nav a:hover {
+    background-color: var(--color-primary-100);
+    color: var(--color-primary-700);
+}
+
+.hero-pagination nav span[aria-current="page"] > span {
+    background-color: var(--color-primary-600);
+    border-color: var(--color-primary-600);
+    color: white;
+}
+
+.hero-pagination nav span[aria-disabled="true"] > span {
+    background-color: var(--color-accent-100);
+    border-color: var(--color-accent-300);
+    color: var(--color-text-300);
+}
+
+.hero-pagination nav .shadow-sm {
+    box-shadow: none;
+    background: transparent;
+    border-radius: 0;
+}
+
+.hero-pagination nav .shadow-sm > span > span,
+.hero-pagination nav .shadow-sm > span > a,
+.hero-pagination nav .shadow-sm > a {
+    margin-left: 0.25rem;
+    border-radius: 0.5rem !important;
+    padding: 0.4rem 0.65rem !important;
+}
