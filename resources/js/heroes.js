@@ -19,3 +19,34 @@ createModal.addEventListener('click', function(event) {
 if (window.openCreateHeroModal) {
     createModal.classList.remove('hidden');
 }
+
+const showButtons = document.querySelectorAll('.hero-show-button');
+const showModal = document.getElementById('show-hero-modal');
+const showModalContent = document.getElementById('show-hero-modal-content');
+const showModalBody = document.getElementById('show-hero-modal-body');
+const closeShowButton = document.getElementById('close-show-hero-modal');
+
+showButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        const url = button.dataset.url;
+
+        fetch(url)
+            .then(function(response) {
+                return response.text();
+            })
+            .then(function(html) {
+                showModalBody.innerHTML = html;
+                showModal.classList.remove('hidden');
+            });
+    });
+});
+
+closeShowButton.addEventListener('click', function() {
+    showModal.classList.add('hidden');
+});
+
+showModal.addEventListener('click', function(event) {
+    if (!event.target.closest('#show-hero-modal-content')) {
+        showModal.classList.add('hidden');
+    }
+});
