@@ -60,7 +60,9 @@ class HeroController extends Controller
      */
     public function edit(Hero $hero)
     {
-        //
+        return view('heroes._edit-modal', [
+            'hero' => $hero,
+        ]);
     }
 
     /**
@@ -68,7 +70,19 @@ class HeroController extends Controller
      */
     public function update(Request $request, Hero $hero)
     {
-        //
+        $request->merge([
+            'name' => preg_replace('/\s+/', ' ', trim($request->name)),
+        ]);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:10',
+            'hero_class' => 'required|in:warrior,cleric,mage,rogue',
+            'level' => 'required|integer|min:1|max:10'
+        ]);
+
+        $hero->update($validated);
+
+        return redirect()->route('heroes.index');
     }
 
     /**

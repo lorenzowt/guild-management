@@ -48,3 +48,20 @@
         </div>
     </div>
 </div>
+<div class="mt-8  gap-3 flex items-center justify-end border-t border-accent-300 pt-6">
+    <button
+        type="button"
+        id="close-show-hero-modal"
+        class="rounded-xl px-5 py-3 text-sm font-semibold text-text-400 transition hover:bg-accent-100 hover:text-text-500"
+    >
+        Close
+    </button>
+    <button
+    type="button"
+    id="open-edit-modal"
+    class="rounded-xl bg-accent-700 px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-text-400/20 transition hover:bg-accent-800"
+    data-url="{{ route('heroes.edit', $hero) }}"
+    >
+    Edit Hero
+</button>
+</div>

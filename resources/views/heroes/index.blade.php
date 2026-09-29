@@ -111,6 +111,7 @@
     </div>
     @include('heroes._create-modal')
     @include('heroes._show-modal')
+    <div id="edit-hero-modal-container"></div>
 </section>
 @endsection
 
