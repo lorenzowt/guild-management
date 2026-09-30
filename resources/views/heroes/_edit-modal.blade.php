@@ -20,10 +20,13 @@
                         type="text"
                         name="name"
                         id="name"
-                        value="{{ $hero->name }}"
+                        value="{{ old('name', $hero->name) }}"
                         required
                         class="w-full rounded-xl border border-accent-300 bg-white px-4 py-3 text-sm outline-none transition text-text-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     >
+                    @error('name', 'editHero')
+                        <p class=" mt-1 text-warning-600 text-xs">{{$message}}</p>
+                    @enderror
                 </div>
                 <div>
                     <label for="level" class="mb-2 block text-sm font-semibold text-text-500">
@@ -34,11 +37,14 @@
                         type="number"
                         name="level"
                         id="level"
-                        value="{{ $hero->level }}"
+                        value="{{ old('level', $hero->level) }}"
                         min="1"
                         required
                         class="w-full rounded-xl border border-accent-300 bg-white px-4 py-3 text-sm text-text-600 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     >
+                    @error('level', 'editHero')
+                        <p class=" mt-1 text-warning-600 text-xs">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-semibold text-text-500">
@@ -53,7 +59,7 @@
                                     id="edit-hero-class-{{ $heroClass->value }}"
                                     value="{{ $heroClass->value }}"
                                     class="peer sr-only"
-                                    {{ $heroClass === $hero->hero_class ? 'checked' : '' }}
+                                    {{ $heroClass->value === old('hero_class', $hero->hero_class->value) ? 'checked' : '' }}
                                 >
 
                                 <label
@@ -64,6 +70,9 @@
                                 </label>
                             </div>
                         @endforeach
+                        @error('hero_class', 'editHero')
+                            <p class=" mt-1 text-warning-600 text-xs">{{$message}}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="mt-8 flex items-center justify-end gap-3 border-t border-accent-300 pt-6">

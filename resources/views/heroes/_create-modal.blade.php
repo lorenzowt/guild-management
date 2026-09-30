@@ -34,7 +34,7 @@
                                 class="w-full rounded-xl border border-accent-300 bg-white px-4 py-3 text-sm text-text-600 outline-none transition placeholder:text-text-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                             >
                             @error('name')
-                            <p class=" mt-1 text-warning-600 text-xs">Names must be smaller than 30 characters</p>
+                            <p class=" mt-1 text-warning-600 text-xs">{{$message}}</p>
                             @enderror
                         </div>
                         <div>

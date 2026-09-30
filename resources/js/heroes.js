@@ -74,37 +74,25 @@ showModal.addEventListener('click', function(event) {
 editModalContainer.addEventListener('click', function(event) {
     if (event.target.closest('#close-edit-hero-modal')) {
         const editModal = document.getElementById('edit-hero-modal');
-        showModal.classList.remove('hidden');
         editModal.classList.add('hidden');
     }
 });
 
-editModalContainer.addEventListener('submit', function(event) {
-    event.preventDefault();
+if (window.openEditHeroModal) {
+    const editModal = document.getElementById('edit-hero-modal');
 
-    const form = event.target;
-    const url = form.action;
-    const formData = new FormData(form);
-    fetch(url, {
-        method: 'POST',
-        body: formData
-    })
+    editModal.classList.remove('hidden');
+}
+
+if (window.showHeroUrl) {
+    const url = window.showHeroUrl;
+
+    fetch(url)
         .then(function(response) {
-            return response.json();
+            return response.text();
         })
-        .then(function(data) {
-            if(data.success) {
-                const editModal = document.getElementById('edit-hero-modal');
-
-                fetch(data.show_url)
-                    .then(function(response) {
-                        return response.text();
-                    })
-                    .then(function(html) {
-                        showModalBody.innerHTML = html;
-                        showModal.classList.remove('hidden');
-                        editModal.classList.add('hidden');
-                    });
-            }
+        .then(function(html) {
+            showModalBody.innerHTML = html;
+            showModal.classList.remove('hidden');
         });
-});
+}

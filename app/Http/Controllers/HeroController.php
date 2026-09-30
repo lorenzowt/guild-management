@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Hero;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use App\Http\Requests\UpdateHeroRequest;
 
 
 class HeroController extends Controller
@@ -13,8 +15,24 @@ class HeroController extends Controller
      */
     public function index()
     {
+        $editHero = null;
+        $id = session('edit_hero_id');
+
+        $showHero = null;
+        $showHeroId = session('show_hero_id');
+
+        if ($id) {
+            $editHero = Hero::find($id);
+        }
+
+        if ($showHeroId) {
+            $showHero = Hero::find($showHeroId);
+        }
+
         return view('heroes.index', [
             'heroes' => Hero::paginate(7),
+            'editHero' => $editHero,
+            'showHero' => $showHero,
         ]);
     }
 
@@ -68,24 +86,13 @@ class HeroController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Hero $hero)
+    public function update(UpdateHeroRequest $request, Hero $hero)
     {
-        $request->merge([
-            'name' => preg_replace('/\s+/', ' ', trim($request->name)),
-        ]);
+        $hero->update($request->validated());
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:10',
-            'hero_class' => 'required|in:warrior,cleric,mage,rogue',
-            'level' => 'required|integer|min:1|max:10'
-        ]);
+        session()->flash('show_hero_id', $hero->id);
 
-        $hero->update($validated);
-
-        return response()->json([
-            'success' => true,
-            'show_url' => route('heroes.show', $hero),
-            ]);
+        return redirect()->route('heroes.index');
     }
 
     /**
