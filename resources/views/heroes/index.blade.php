@@ -2,7 +2,11 @@
 
 @section('content')
 @vite('resources/js/heroes.js')
-
+@if($errors->createHero->any())
+    <script>
+        window.openCreateHeroModal = true;
+    </script>
+@endif
 <section class="flex flex-col min-h-full bg-surface-500 rounded-xl px-5 pt-3 pb-5 gap-10">
     <div class="pb-2 px-4 border-m border-b border-accent-500">
         <p class="text-text-400 text-sm">Hero Management</p>

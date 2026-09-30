@@ -1,4 +1,9 @@
-<div id="create-hero-modal" class="hidden fixed inset-0 z-50 bg-background-900/20 backdrop-blur-sm">
+<div id="create-hero-modal" 
+@class([
+    'hidden' => !$errors->createHero->any(),
+    'fixed inset-0 z-50 bg-background-900/20 backdrop-blur-sm',
+    ])
+>
     <div class="flex min-h-full items-center justify-center p-6">
         <div id="create-hero-modal-content" class="w-full max-w-2xl rounded-3xl bg-surface-500 p-8 shadow-2xl">
             <div class="mb-8">

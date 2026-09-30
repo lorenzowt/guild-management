@@ -26,6 +26,7 @@ class StoreHeroRequest extends FormRequest
         return [
             'name' => 'required|string|max:20',
             'hero_class' => 'required|in:warrior,cleric,mage,rogue',
+            'level' => 'required|integer|min:1|max:10'
         ];
     }
 }
