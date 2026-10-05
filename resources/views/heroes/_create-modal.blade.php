@@ -1,4 +1,9 @@
-<div id="create-hero-modal" class="hidden fixed inset-0 z-50 bg-background-900/20 backdrop-blur-sm">
+<div id="create-hero-modal" 
+@class([
+    'hidden' => !$errors->createHero->any(),
+    'fixed inset-0 z-50 bg-background-900/20 backdrop-blur-sm',
+    ])
+>
     <div class="flex min-h-full items-center justify-center p-6">
         <div id="create-hero-modal-content" class="w-full max-w-2xl rounded-3xl bg-surface-500 p-8 shadow-2xl">
             <div class="mb-8">
@@ -34,7 +39,7 @@
                                 class="w-full rounded-xl border border-accent-300 bg-white px-4 py-3 text-sm text-text-600 outline-none transition placeholder:text-text-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                             >
                             @error('name')
-                            <p class=" mt-1 text-warning-600 text-xs">Names must be smaller than 30 characters</p>
+                            <p class=" mt-1 text-warning-600 text-xs">{{$message}}</p>
                             @enderror
                         </div>
                         <div>

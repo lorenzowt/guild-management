@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hero;
-use Illuminate\Http\Request;
+use App\Http\Requests\UpdateHeroRequest;
+use App\Http\Requests\StoreHeroRequest;
 
 
 class HeroController extends Controller
@@ -13,8 +14,24 @@ class HeroController extends Controller
      */
     public function index()
     {
+        $editHero = null;
+        $id = session('edit_hero_id');
+
+        $showHero = null;
+        $showHeroId = session('show_hero_id');
+
+        if ($id) {
+            $editHero = Hero::find($id);
+        }
+
+        if ($showHeroId) {
+            $showHero = Hero::find($showHeroId);
+        }
+
         return view('heroes.index', [
             'heroes' => Hero::paginate(7),
+            'editHero' => $editHero,
+            'showHero' => $showHero,
         ]);
     }
 
@@ -29,18 +46,9 @@ class HeroController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreHeroRequest $request)
     {
-        $request->merge([
-            'name' => preg_replace('/\s+/', ' ', trim($request->name)),
-        ]);
-
-        $validated = $request->validate([
-            'name' => 'required|string|max:10',
-            'hero_class' => 'required|in:warrior,cleric,mage,rogue',
-        ]);
-
-        Hero::create($validated);
+        Hero::create($request->validated());
 
         return redirect()->route('heroes.index');
     }
@@ -60,15 +68,21 @@ class HeroController extends Controller
      */
     public function edit(Hero $hero)
     {
-        //
+        return view('heroes._edit-modal', [
+            'hero' => $hero,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Hero $hero)
+    public function update(UpdateHeroRequest $request, Hero $hero)
     {
-        //
+        $hero->update($request->validated());
+
+        session()->flash('show_hero_id', $hero->id);
+
+        return redirect()->route('heroes.index');
     }
 
     /**

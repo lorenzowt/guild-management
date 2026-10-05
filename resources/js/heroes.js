@@ -24,7 +24,7 @@ const showButtons = document.querySelectorAll('.hero-show-button');
 const showModal = document.getElementById('show-hero-modal');
 const showModalContent = document.getElementById('show-hero-modal-content');
 const showModalBody = document.getElementById('show-hero-modal-body');
-const closeShowButton = document.getElementById('close-show-hero-modal');
+const editModalContainer = document.getElementById('edit-hero-modal-container');
 
 showButtons.forEach(function(button) {
     button.addEventListener('click', function() {
@@ -41,12 +41,58 @@ showButtons.forEach(function(button) {
     });
 });
 
-closeShowButton.addEventListener('click', function() {
-    showModal.classList.add('hidden');
-});
-
 showModal.addEventListener('click', function(event) {
+
+    if (event.target.closest('#close-show-hero-modal')) {
+        showModal.classList.add('hidden');
+    }
+
     if (!event.target.closest('#show-hero-modal-content')) {
         showModal.classList.add('hidden');
     }
+
+    const editButton = event.target.closest('#open-edit-modal');
+
+    if (editButton) {
+        const url = editButton.dataset.url;
+
+        fetch(url)
+            .then(function(response) {
+                return response.text();
+            })
+            .then(function(html) {
+                editModalContainer.innerHTML = html;
+
+                const editModal = document.getElementById('edit-hero-modal');
+                editModal.classList.remove('hidden');
+
+                showModal.classList.add('hidden');
+            });
+    }
 });
+
+editModalContainer.addEventListener('click', function(event) {
+    if (event.target.closest('#close-edit-hero-modal')) {
+        const editModal = document.getElementById('edit-hero-modal');
+        editModal.classList.add('hidden');
+    }
+});
+
+if (window.openEditHeroModal) {
+    const editModal = document.getElementById('edit-hero-modal');
+
+    editModal.classList.remove('hidden');
+}
+
+if (window.showHeroUrl) {
+    const url = window.showHeroUrl;
+
+    fetch(url)
+        .then(function(response) {
+            return response.text();
+        })
+        .then(function(html) {
+            showModalBody.innerHTML = html;
+            showModal.classList.remove('hidden');
+        });
+}

@@ -15,17 +15,7 @@
             </div>
 
             <div id="show-hero-modal-body">
-                {{-- Hero information will be loaded here --}}
-            </div>
 
-            <div class="mt-8 flex items-center justify-end border-t border-accent-300 pt-6">
-                <button
-                    type="button"
-                    id="close-show-hero-modal"
-                    class="rounded-xl px-5 py-3 text-sm font-semibold text-text-400 transition hover:bg-accent-100 hover:text-text-500"
-                >
-                    Close
-                </button>
             </div>
         </div>
     </div>

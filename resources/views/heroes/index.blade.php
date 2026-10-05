@@ -2,7 +2,7 @@
 
 @section('content')
 @vite('resources/js/heroes.js')
-@if ($errors->any())
+@if($errors->createHero->any())
     <script>
         window.openCreateHeroModal = true;
     </script>
@@ -111,6 +111,21 @@
     </div>
     @include('heroes._create-modal')
     @include('heroes._show-modal')
+    <div id="edit-hero-modal-container">
+        @if ($editHero)
+            @include('heroes._edit-modal', ['hero' => $editHero])
+        @endif
+    </div>
+    @if ($editHero)
+    <script>
+        window.openEditHeroModal = true;
+    </script>
+    @endif
+    @if ($showHero)
+    <script>
+        window.showHeroUrl = {{ Js::from(route('heroes.show', $showHero)) }}
+    </script>
+    @endif
 </section>
 @endsection
 
