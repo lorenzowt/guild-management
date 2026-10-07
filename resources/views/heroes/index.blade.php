@@ -96,11 +96,14 @@
                                                 Cure
                                             </button>
                                         </form>
-                                        <form method="POST" action="{{ route('heroes.cure', $hero) }}">
+                                        <form method="POST" action="{{ route('heroes.destroy', $hero) }}">
                                             @csrf
+                                            @method('DELETE')
+
+                                            <input type="hidden" name="page" value="{{ $heroes->currentPage() }}">
 
                                             <button
-                                            type="button"
+                                            type="submit"
                                             class="rounded-lg bg-danger-300/80 px-3.5 py-2 text-xs font-bold tracking-wide shadow-sm text-danger-700 transition hover:bg-danger-500/80 hover:text-danger-800"
                                         >
                                             Remove

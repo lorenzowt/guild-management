@@ -91,9 +91,14 @@ class HeroController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Hero $hero)
+    public function destroy(Request $request, Hero $hero)
     {
-        //
+        $hero->delete();
+
+        return redirect()->route('heroes.index', [
+            'page' => $request->input('page'),
+        ]);
+
     }
 
     /**
