@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Hero;
 use App\Enums\HeroStatus;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateHeroRequest;
 use App\Http\Requests\StoreHeroRequest;
+
 
 
 class HeroController extends Controller
@@ -97,7 +99,7 @@ class HeroController extends Controller
     /**
     * Change hero status from injured to available
     */
-    public function cure(Hero $hero)
+    public function cure(Request $request, Hero $hero)
     {
         if ($hero->status === HeroStatus::INJURED) {
 
@@ -106,6 +108,8 @@ class HeroController extends Controller
             $hero->save();
         }
 
-        return redirect()->route('heroes.index');
+        return redirect()->route('heroes.index', [
+            'page' => $request->input('page'),
+        ]);
     }
 }
