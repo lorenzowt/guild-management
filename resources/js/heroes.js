@@ -96,3 +96,13 @@ if (window.showHeroUrl) {
             showModal.classList.remove('hidden');
         });
 }
+
+document.addEventListener('submit', function (event) {
+    if (!event.target.matches('.remove-hero-form')) {
+        return;
+    }
+
+    if (!confirm('Are you sure you want to remove this hero?')) {
+        event.preventDefault();
+    }
+});

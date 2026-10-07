@@ -96,7 +96,7 @@
                                                 Cure
                                             </button>
                                         </form>
-                                        <form method="POST" action="{{ route('heroes.destroy', $hero) }}">
+                                        <form method="POST" action="{{ route('heroes.destroy', $hero) }}" class="remove-hero-form">
                                             @csrf
                                             @method('DELETE')
 
