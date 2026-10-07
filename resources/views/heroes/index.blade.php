@@ -84,19 +84,28 @@
 
                                 <td class="px-7 py-4">
                                     <div class="flex justify-end gap-2">
-                                        <button
-                                            type="button"
-                                            class="rounded-lg bg-secondary-300 px-3.5 py-2 text-xs font-bold tracking-wide shadow-sm text-secondary-800 transition hover:bg-secondary-500 hover:text-secondary-900"
-                                        >
-                                            Cure
-                                        </button>
+                                        <form method="POST" action="{{ route('heroes.cure', $hero) }}">
+                                            @csrf
 
-                                        <button
+                                            <input type="hidden" name="page" value="{{ $heroes->currentPage() }}">
+                                            
+                                            <button
+                                                type="submit"
+                                                class="rounded-lg bg-secondary-300 px-3.5 py-2 text-xs font-bold tracking-wide shadow-sm text-secondary-800 transition hover:bg-secondary-500 hover:text-secondary-900"
+                                            >
+                                                Cure
+                                            </button>
+                                        </form>
+                                        <form method="POST" action="{{ route('heroes.cure', $hero) }}">
+                                            @csrf
+
+                                            <button
                                             type="button"
                                             class="rounded-lg bg-danger-300/80 px-3.5 py-2 text-xs font-bold tracking-wide shadow-sm text-danger-700 transition hover:bg-danger-500/80 hover:text-danger-800"
                                         >
                                             Remove
                                         </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>

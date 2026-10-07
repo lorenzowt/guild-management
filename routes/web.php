@@ -8,3 +8,6 @@ Route::get('/', function () {
 });
 
 Route::resource('heroes', HeroController::class);
+
+Route::post('/heroes/{hero}/cure', [HeroController::class, 'cure'])
+    ->name('heroes.cure');
