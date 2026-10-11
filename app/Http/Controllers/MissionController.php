@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\MissionState;
 use Illuminate\Http\Request;
 use App\Models\Mission;
 
@@ -12,7 +13,18 @@ class MissionController extends Controller
      */
     public function index()
     {
-        //
+        return view('missions.index', [
+            'assignedMissions' => Mission::with(['quest', 'heroes'])
+                ->where('status', MissionState::ASSIGNED->value)
+                ->paginate(5, ['*'], 'assigned_page'),
+
+            'completedMissions' => Mission::with(['quest', 'heroes'])
+                ->whereIn('status', [
+                    MissionState::SUCCESSFUL->value,
+                    MissionState::FAILED->value,
+                ])
+                ->paginate(5, ['*'], 'completed_page'),
+        ]);
     }
 
     /**
