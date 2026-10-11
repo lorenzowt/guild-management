@@ -18,5 +18,10 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         Hero::factory()->count(5)->create();
+
+        $this->call([
+            QuestSeeder::class,
+            MissionSeeder::class,
+        ]);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Quest;
 
 class Quest extends Model
 {
@@ -16,4 +15,9 @@ class Quest extends Model
         'description',
         'difficulty',
     ];
+
+    public function missions()
+    {
+        return $this->hasMany(Mission::class);
+    }
 }

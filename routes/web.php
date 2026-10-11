@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HeroController;
 use App\Http\Controllers\QuestController;
+use App\Http\Controllers\MissionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,3 +16,5 @@ Route::post('/heroes/{hero}/cure', [HeroController::class, 'cure'])->name('heroe
 Route::get('/quests', [QuestController::class, 'index'])->name('quests.index');
 
 Route::get('/quests/{quest}', [QuestController::class, 'show'])->name('quests.show');
+
+Route::resource('missions', MissionController::class)->only(['index', 'store', 'show', 'update']);
