@@ -15,4 +15,9 @@ class Quest extends Model
         'description',
         'difficulty',
     ];
+
+    public function missions()
+    {
+        return $this->hasMany(Mission::class);
+    }
 }

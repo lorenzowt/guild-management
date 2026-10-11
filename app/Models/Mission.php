@@ -26,4 +26,9 @@ class Mission extends Model
     {
         return $this->belongsToMany(Hero::class);
     }
+
+    public function quests()
+    {
+        return $this->belongsTo(Quest::class);
+    }
 }
