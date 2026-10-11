@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\MissionState;
+use App\Models\Hero;
 
 class Mission extends Model
 {
@@ -19,5 +20,10 @@ class Mission extends Model
             'status' => MissionState::class,
             'completed_at' => 'datetime',
         ];
+    }
+
+    public function heroes()
+    {
+        return $this->belongsToMany(Hero::class);
     }
 }

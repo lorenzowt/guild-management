@@ -6,6 +6,7 @@ use App\Enums\HeroClass;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Enums\HeroStatus;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Mission;
 
 class Hero extends Model
 {
@@ -24,6 +25,11 @@ class Hero extends Model
         'hero_class' => HeroClass::class,
         'status' => HeroStatus::class,
         ];
+    }
+
+    public function missions()
+    {
+        return $this->belongsToMany(Mission::class);
     }
 
 }
