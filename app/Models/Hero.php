@@ -10,6 +10,9 @@ use App\Models\Mission;
 
 class Hero extends Model
 {
+    private const MAX_LEVEL = 10;
+    private const MIN_LEVEL = 1;
+
     use HasFactory;
     
     protected $fillable = [
@@ -18,6 +21,28 @@ class Hero extends Model
         'level',
         'status',
     ];
+
+    public function levelUp():bool
+    {
+        if ($this->level >= self::MAX_LEVEL){
+            return false;
+        }
+
+        $this->increment('level');
+
+        return true;
+    }
+
+    public function levelDown():bool
+    {
+        if ($this->level === self::MIN_LEVEL){
+            return false;
+        }
+
+        $this->decrement('level');
+
+        return true;
+    }
     
     protected function casts(): array
     { 
