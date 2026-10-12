@@ -22,26 +22,31 @@ class Hero extends Model
         'status',
     ];
 
-    public function levelUp():bool
+    public function levelUp()
     {
         if ($this->level >= self::MAX_LEVEL){
-            return false;
+            return;
         }
 
         $this->increment('level');
 
-        return true;
     }
 
-    public function levelDown():bool
+    public function levelDown()
     {
         if ($this->level === self::MIN_LEVEL){
-            return false;
+            return;
         }
 
         $this->decrement('level');
 
-        return true;
+    }
+
+    public function injure()
+    {
+        $this->update([
+            'status' => HeroStatus::INJURED,
+        ]);
     }
     
     protected function casts(): array
