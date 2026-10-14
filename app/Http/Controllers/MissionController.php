@@ -34,7 +34,9 @@ class MissionController extends Controller
 
         return redirect()
             ->route('missions.index')
-            ->with('outcome', $outcome->value);
+            ->with('outcome', $outcome->value)
+            ->with('quest', $mission->quest->name)
+            ->with('hero_names',$mission->heroes->pluck('name')->all());
     }
 
     /**

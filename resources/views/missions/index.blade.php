@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@vite('resources/js/missions.js')
+@if(session('outcome'))
+    <script>
+        window.openMissionOutcomeModal = true;
+    </script>
+@endif
+
 @section('content')
     <section class="min-h-full rounded-xl bg-surface-500 px-3 py-5 sm:px-5">
         <div class="border-b border-accent-500 px-4 pb-2">
@@ -26,4 +33,5 @@
             </div>
         </div>
     </section>
+@include('missions._mission-outcome-modal')
 @endsection

@@ -70,7 +70,7 @@
         </div>
 
         @if ($missions->hasPages())
-            <div class="border-t border-[#eee6f0] px-7 py-4">
+            <div class="border-t border-[#eee6f0] px-7 py-4 hero-pagination">
                 {{ $missions->onEachSide(1)->links() }}
             </div>
         @endif
