@@ -14,6 +14,31 @@ class Mission extends Model
       'completed_at',  
     ];
 
+    public function markSucessful()
+    {
+        if ($this->status != MissionState::ASSIGNED) {
+            return;
+        } 
+
+        $this->update([
+            'status' => MissionState::SUCCESSFUL,
+            'completed_at' => now()
+        ]);
+    }
+
+    public function markFailed()
+    {
+        if ($this->status != MissionState::ASSIGNED) {
+            return;
+        } 
+
+        $this->update([
+            'status' => MissionState::FAILED,
+            'completed_at' => now()
+        ]);
+    }
+
+
     protected function casts(): array
     {
         return [

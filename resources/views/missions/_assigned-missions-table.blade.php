@@ -21,7 +21,7 @@
                         <th class="px-7 py-4">Quest</th>
                         <th class="px-6 py-4">Party</th>
                         <th class="px-6 py-4">Status</th>
-                        <th class="px-6 py-4 text-right">Action</th>
+                        <th class="px-8 py-4 text-right">Action</th>
                     </tr>
                 </thead>
 
@@ -48,13 +48,18 @@
                             </td>
 
                             <td class="px-6 py-4 text-right">
-                                {{-- Change this back to a form once the route exists --}}
-                                <button
-                                    type="button"
-                                    class="rounded-xl bg-primary-500/80 px-2 py-2 text-xs font-semibold text-white transition hover:bg-primary-500"
-                                >
-                                    Start mission
-                                </button>
+                                <form action="{{ route('missions.complete', $mission) }}" method="POST">
+                                    @csrf
+
+                                    <button
+                                        type="submit"
+                                        class="rounded-xl bg-primary-500/80 px-2 py-1.5 text-xs font-semibold tracking-wide text-white transition hover:bg-primary-500"
+                                    >
+                                        <span class="[text-shadow:0.5px_0.5px_2px_rgb(79_54_68_/_70%)]">
+                                            Deploy
+                                        </span>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @empty
@@ -69,7 +74,7 @@
         </div>
 
         @if ($missions->hasPages())
-            <div class="border-t border-[#eee6f0] px-7 py-4">
+            <div class="border-t border-[#eee6f0] px-7 py-4 hero-pagination">
                 {{ $missions->onEachSide(1)->links() }}
             </div>
         @endif

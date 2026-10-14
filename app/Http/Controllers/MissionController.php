@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\MissionState;
 use Illuminate\Http\Request;
 use App\Models\Mission;
+use App\Services\Missions\CompleteMission;
 
 class MissionController extends Controller
 {
@@ -25,6 +26,17 @@ class MissionController extends Controller
                 ])
                 ->paginate(5, ['*'], 'completed_page'),
         ]);
+    }
+
+    public function complete(Mission $mission, CompleteMission $completeMission) 
+    {
+        $outcome = $completeMission->complete($mission);
+
+        return redirect()
+            ->route('missions.index')
+            ->with('outcome', $outcome->value)
+            ->with('quest', $mission->quest->name)
+            ->with('hero_names',$mission->heroes->pluck('name')->all());
     }
 
     /**
