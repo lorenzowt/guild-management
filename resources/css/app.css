@@ -291,3 +291,69 @@
     height: 0.875rem;
     flex-shrink: 0;
 }
+
+/* Mission hero selector — Tom Select */
+#create-mission-modal .ts-wrapper {
+    width: 100%;
+}
+
+#create-mission-modal .ts-control {
+    min-height: 48px;
+    padding: 8px 12px;
+    border: 1px solid var(--color-accent-300);
+    border-radius: 0.75rem;
+    background: white;
+    color: var(--color-text-600);
+    box-shadow: none;
+}
+
+#create-mission-modal .ts-wrapper.focus .ts-control {
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary-500) 20%, transparent);
+}
+
+#create-mission-modal .ts-wrapper.multi .ts-control > div {
+    margin: 2px;
+    padding: 4px 8px;
+    border: 0;
+    border-radius: 9999px;
+    background: var(--color-primary-100);
+    color: var(--color-primary-800);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+#create-mission-modal .ts-wrapper.plugin-remove_button .item .remove {
+    margin-left: 6px;
+    border-left: 0;
+    color: var(--color-primary-700);
+}
+
+#create-mission-modal .ts-wrapper.plugin-remove_button .item .remove:hover {
+    background: transparent;
+    color: var(--color-danger-700);
+}
+
+#create-mission-modal .ts-dropdown {
+    overflow: hidden;
+    margin-top: 6px;
+    border: 1px solid var(--color-accent-300);
+    border-radius: 0.75rem;
+    background: white;
+    color: var(--color-text-600);
+    box-shadow: 0 12px 24px rgb(79 54 68 / 15%);
+}
+
+#create-mission-modal .ts-dropdown .option {
+    padding: 10px 12px;
+}
+
+#create-mission-modal .ts-dropdown .active {
+    background: var(--color-primary-50);
+    color: var(--color-primary-800);
+}
+
+#create-mission-modal .ts-dropdown .selected {
+    background: var(--color-primary-100);
+    color: var(--color-primary-800);
+}
