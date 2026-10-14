@@ -6,6 +6,11 @@
         window.openMissionOutcomeModal = true;
     </script>
 @endif
+@if ($errors->createMission->any())
+    <script>
+        window.openCreateMissionModal = true;
+    </script>
+@endif
 
 @section('content')
     <section class="min-h-full rounded-xl bg-surface-500 px-3 py-5 sm:px-5">
@@ -15,10 +20,24 @@
 
         {{-- Wider than before, but still capped and centred --}}
         <div class="mx-auto w-full max-w-[90rem] py-8">
-            <div class="px-4">
-                <h1 class="text-3xl font-bold tracking-tight text-text-500">
-                    Missions
-                </h1>
+            <div class="flex items-center justify-between gap-4 px-4">
+                <div>
+                    <h1 class="text-3xl font-bold tracking-tight text-text-500">
+                        Missions
+                    </h1>
+
+                    <p class="mt-2 text-sm text-text-500">
+                        Assign a quest to your available heroes and track its outcome.
+                    </p>
+                </div>
+
+                <button
+                    id="create-mission-button"
+                    type="button"
+                    class="shrink-0 rounded-xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-text-400/30 transition hover:bg-primary-700"
+                >
+                    + Assign mission
+                </button>
             </div>
 
             {{-- Stacked on small screens; side-by-side when there is room --}}
@@ -34,4 +53,5 @@
         </div>
     </section>
 @include('missions._mission-outcome-modal')
+@include('missions._create-modal')
 @endsection

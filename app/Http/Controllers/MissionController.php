@@ -7,28 +7,38 @@ use Illuminate\Http\Request;
 use App\Models\Mission;
 use App\Services\Missions\CompleteMission;
 use App\Http\Requests\StoreMissionRequest;
+use App\Enums\HeroStatus;
+use App\Models\Hero;
+use App\Models\Quest;
+use Illuminate\Support\Facades\DB;
 
 class MissionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return view('missions.index', [
-            'assignedMissions' => Mission::with(['quest', 'heroes'])
-                ->where('status', MissionState::ASSIGNED->value)
-                ->paginate(5, ['*'], 'assigned_page'),
+public function index()
+{
+    return view('missions.index', [
+        'assignedMissions' => Mission::with(['quest', 'heroes'])
+            ->where('status', MissionState::ASSIGNED->value)
+            ->paginate(5, ['*'], 'assigned_page'),
 
-            'completedMissions' => Mission::with(['quest', 'heroes'])
-                ->whereIn('status', [
-                    MissionState::SUCCESSFUL->value,
-                    MissionState::FAILED->value,
-                ])
-                ->paginate(5, ['*'], 'completed_page'),
-        ]);
-    }
+        'completedMissions' => Mission::with(['quest', 'heroes'])
+            ->whereIn('status', [
+                MissionState::SUCCESSFUL->value,
+                MissionState::FAILED->value,
+            ])
+            ->paginate(5, ['*'], 'completed_page'),
 
+        'quests' => Quest::orderBy('name')->get(),
+
+        'availableHeroes' => Hero::query()
+            ->where('status', HeroStatus::AVAILABLE->value)
+            ->orderBy('name')
+            ->get(),
+    ]);
+}
     public function complete(Mission $mission, CompleteMission $completeMission) 
     {
         $outcome = $completeMission->complete($mission);
@@ -51,12 +61,22 @@ class MissionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMissionRequest $request)
-    {
-        Mission::create($request->validated());
+public function store(StoreMissionRequest $request)
+{
+    $validated = $request->validated();
 
-        return redirect()->route('missions.index');
-    }
+    DB::transaction(function () use ($validated) {
+        $mission = Mission::create([
+            'quest_id' => $validated['quest_id'],
+        ]);
+
+        $mission->heroes()->attach($validated['hero_ids']);
+    });
+
+    return redirect()
+        ->route('missions.index')
+        ->with('success', 'Mission assigned successfully.');
+}
 
     /**
      * Display the specified resource.

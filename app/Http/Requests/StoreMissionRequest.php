@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Enums\HeroStatus;
+use Illuminate\Validation\Rule;
 
 class StoreMissionRequest extends FormRequest
 {
@@ -33,7 +35,8 @@ class StoreMissionRequest extends FormRequest
                 'required',
                 'integer',
                 'distinct',
-                'exists:heroes,id',
+                Rule::exists('heroes', 'id')
+                    ->where('status', HeroStatus::AVAILABLE->value),
             ],
         ];
     }
