@@ -6,6 +6,7 @@ use App\Enums\MissionState;
 use Illuminate\Http\Request;
 use App\Models\Mission;
 use App\Services\Missions\CompleteMission;
+use App\Http\Requests\StoreMissionRequest;
 
 class MissionController extends Controller
 {
@@ -50,9 +51,11 @@ class MissionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMissionRequest $request)
     {
-        //
+        Mission::create($request->validated());
+
+        return redirect()->route('missions.index');
     }
 
     /**
