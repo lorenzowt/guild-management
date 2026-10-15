@@ -34,6 +34,15 @@
     </div>
 </header> --}}
 
-<header class=" w-full h-20 bg-background-500">
-
+<header class="flex h-20 w-full items-center bg-background-500 px-4 lg:hidden">
+    <button
+        id="open-sidebar-button"
+        type="button"
+        aria-label="Open navigation"
+        aria-controls="sidebar"
+        aria-expanded="false"
+        class="rounded-xl bg-surface-500 p-3 text-xl text-text-500 shadow-sm transition hover:bg-accent-100"
+    >
+        ☰
+    </button>
 </header>

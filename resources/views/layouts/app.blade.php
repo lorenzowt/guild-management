@@ -15,20 +15,22 @@
             </style>
         @endif
     </head>
-    <body class="min-h-screen bg-background-500">
-        <div class="min-h-screen flex">
+<body class="min-h-screen bg-background-500">
+    <div
+        id="sidebar-backdrop"
+        class="fixed inset-0 z-40 hidden bg-text-900/20 backdrop-blur-sm lg:hidden"
+    ></div>
 
-            @include('partials.sidebar')
+    <div class="flex min-h-screen">
+        @include('partials.sidebar')
 
-            <div class=" pb-4 pr-4 flex flex-col flex-1">
+        <div class="flex min-w-0 flex-1 flex-col pb-4 pr-0 lg:pr-4">
+            @include('partials.topbar')
 
-                @include('partials.topbar')
-
-                <main class="flex-1">
-                    @yield('content')
-                </main>
-
-            </div>
+            <main class="flex-1">
+                @yield('content')
+            </main>
         </div>
-    </body>
+    </div>
+</body>
 </html>

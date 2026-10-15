@@ -1,58 +1,93 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Guild Management
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel web application for managing an adventurers' guild. Track heroes, browse quests, and assign heroes to missions. Completing a mission updates its outcome and the participating heroes' levels and conditions.
 
-## About Laravel
+## Technologies
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **PHP 8.3+ and Laravel 13** for server-side application logic, routing, validation, and persistence.
+- **Blade** for server-rendered pages and reusable view partials.
+- **MySQL** as the recommended local database. SQLite is also supported by Laravel; `.env.example` currently defaults to SQLite.
+- **Vite 8** to build and serve frontend assets, integrated with Laravel through `laravel-vite-plugin`.
+- **Tailwind CSS 4** for styling.
+- **JavaScript** for interactive page behavior, including modal dialogs and asynchronous loading of view partials.
+- **Tom Select 2** for searchable quest and hero selectors when creating missions.
+- **Pest 4** for the PHP test suite.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requirements
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.3 or newer with the `pdo_mysql` extension enabled
+- Composer
+- Node.js 20.19+ or 22.12+, with npm
+- MySQL 8 or another compatible MySQL server
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clone the repository and enter the project directory.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. Install the PHP dependencies and create your environment file:
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+   ```bash
+   composer install
+   cp .env.example .env
+   ```
 
-## Agentic Development
+   If you already have a `.env` file, keep it and update its database settings instead of replacing it.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+3. Create an empty MySQL database, for example `guild_management`, and update the database section of `.env` with your local connection details:
+
+   ```dotenv
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=guild_management
+   DB_USERNAME=your_mysql_user
+   DB_PASSWORD=your_mysql_password
+   ```
+
+   The checked-in `.env.example` uses SQLite by default; set `DB_CONNECTION=mysql` as shown above for this setup. The MySQL server must be running, and the database must exist before continuing.
+
+4. Generate the application key, create the tables, and populate the sample guild data:
+
+   ```bash
+   php artisan key:generate
+   php artisan migrate --seed
+   ```
+
+   The default seeders add five sample heroes, three quests, and six missions.
+
+5. Install the JavaScript dependencies and build the frontend assets:
+
+   ```bash
+   npm ci
+   npm run build
+   ```
+
+   Tom Select is already declared in `package.json`, so `npm ci` installs it along with the other frontend dependencies. No separate Tom Select installation is needed.
+
+## Running Locally
+
+Start the local development processes with:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer run dev
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+This runs the Laravel development server, the database queue listener, the log viewer, and the Vite development server together. Open [http://localhost:8000](http://localhost:8000) in your browser. Stop the processes with `Ctrl+C`.
 
-## Contributing
+To run the test suite:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer run test
+```
 
-## Code of Conduct
+## How the Application Works
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+The application follows Laravel's MVC structure. Routes in `routes/web.php` connect requests to controllers; controllers work with Eloquent models and return Blade views. The browser renders those server-generated views, while small JavaScript entry points add interactions without replacing the server-rendered application with a single-page app.
 
-## Security Vulnerabilities
+For example, the hero and quest screens use JavaScript to open modal dialogs and fetch HTML fragments from Laravel routes. Those fragments are Blade partials inserted into the open modal, so the controller and Blade view remain responsible for preparing and presenting the data. The mission form uses Tom Select to make quest and hero selection easier.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Mission completion is handled by the `CompleteMission` service. It delegates the success/failure decision to `MissionOutcomeCalculator`, which compares the quest difficulty with the party's combined hero levels and a bonus for party class diversity. A successful mission levels up its heroes; a failed mission lowers their levels and injures them. This keeps the mission rules in the application layer instead of embedding them in the controller or frontend.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License.
