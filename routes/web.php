@@ -4,10 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HeroController;
 use App\Http\Controllers\QuestController;
 use App\Http\Controllers\MissionController;
+use App\Http\Controllers\GuildOverviewController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [GuildOverviewController::class, 'index'])
+    ->name('guild-overview');
 
 Route::resource('heroes', HeroController::class);
 
@@ -20,3 +20,4 @@ Route::get('/quests/{quest}', [QuestController::class, 'show'])->name('quests.sh
 Route::resource('missions', MissionController::class)->only(['index', 'store', 'show', 'update']);
 
 Route::post('missions/{mission}/complete', [MissionController::class, 'complete'])->name('missions.complete');
+
