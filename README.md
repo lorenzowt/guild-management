@@ -11,7 +11,7 @@ A Laravel web application for managing an adventurers' guild. Track heroes, brow
 - **Tailwind CSS 4** for styling.
 - **JavaScript** for interactive page behavior, including modal dialogs and asynchronous loading of view partials.
 - **Tom Select 2** for searchable quest and hero selectors when creating missions.
-- **Pest 4** for the PHP test suite.
+
 
 ## Requirements
 
