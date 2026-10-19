@@ -17,7 +17,7 @@ Route::get('/quests', [QuestController::class, 'index'])->name('quests.index');
 
 Route::get('/quests/{quest}', [QuestController::class, 'show'])->name('quests.show');
 
-Route::resource('missions', MissionController::class)->only(['index', 'store', 'show', 'update']);
+Route::resource('missions', MissionController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
 
 Route::post('missions/{mission}/complete', [MissionController::class, 'complete'])->name('missions.complete');
 

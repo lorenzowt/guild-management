@@ -10,7 +10,7 @@ use App\Http\Requests\StoreMissionRequest;
 use App\Enums\HeroStatus;
 use App\Models\Hero;
 use App\Models\Quest;
-use Illuminate\Support\Facades\DB;
+use App\Services\Missions\CreateMission;
 
 class MissionController extends Controller
 {
@@ -29,6 +29,7 @@ public function index()
                 MissionState::SUCCESSFUL->value,
                 MissionState::FAILED->value,
             ])
+            ->orderByDesc('created_at')
             ->paginate(5, ['*'], 'completed_page'),
 
         'quests' => Quest::orderBy('name')->get(),
@@ -51,27 +52,13 @@ public function index()
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-public function store(StoreMissionRequest $request)
-{
-    $validated = $request->validated();
-
-    DB::transaction(function () use ($validated) {
-        $mission = Mission::create([
-            'quest_id' => $validated['quest_id'],
-        ]);
-
-        $mission->heroes()->attach($validated['hero_ids']);
-    });
+public function store(
+    StoreMissionRequest $request,
+    CreateMission $createMission,
+) {
+    $createMission->execute($request->validated());
 
     return redirect()
         ->route('missions.index')
@@ -105,8 +92,10 @@ public function store(StoreMissionRequest $request)
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Mission $mission)
     {
-        //
+        $mission->delete();
+
+        return redirect()->route('missions.index');
     }
 }

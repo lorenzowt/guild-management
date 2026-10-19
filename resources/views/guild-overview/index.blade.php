@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="min-h-full rounded-xl bg-surface-500 px-4 py-5 sm:px-6">
+    <section class="h-full overflow-hidden rounded-xl bg-surface-500 px-4 py-5 sm:px-6">
         <div class="mx-auto w-full max-w-[90rem]">
             <div class="rounded-3xl bg-primary-100 px-6 py-10 shadow-sm sm:px-10">
                 <p class="text-sm font-semibold text-primary-700">

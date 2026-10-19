@@ -15,19 +15,14 @@
             </style>
         @endif
     </head>
-<body class="min-h-screen bg-background-500">
-    <div
-        id="sidebar-backdrop"
-        class="fixed inset-0 z-40 hidden bg-text-900/20 backdrop-blur-sm lg:hidden"
-    ></div>
-
-    <div class="flex min-h-screen">
+<body class="h-screen overflow-hidden bg-background-500">
+    <div class="flex h-full">
         @include('partials.sidebar')
 
-        <div class="flex min-w-0 flex-1 flex-col pb-4 pr-0 lg:pr-4">
+        <div class="flex min-h-0 min-w-0 flex-1 flex-col pb-4 pr-0 lg:pr-4">
             @include('partials.topbar')
 
-            <main class="flex-1">
+            <main class="min-h-0 flex-1 overflow-hidden">
                 @yield('content')
             </main>
         </div>

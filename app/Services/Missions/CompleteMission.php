@@ -8,6 +8,7 @@ use App\Models\Mission;
 use App\Models\Hero;
 use App\Models\Quest;
 use Illuminate\Database\Eloquent\Collection;
+use App\Enums\HeroStatus;
 
 class CompleteMission
 {
@@ -33,14 +34,18 @@ class CompleteMission
         return $outcome;
     }
 
-    private function handleSuccessful(Mission $mission)
-    {
-        foreach ($mission->heroes as $hero) {
-            $hero->levelUp();
-        }
+private function handleSuccessful(Mission $mission)
+{
+    foreach ($mission->heroes as $hero) {
+        $hero->levelUp();
 
-        $mission->markSucessful();
+        $hero->update([
+            'status' => HeroStatus::AVAILABLE,
+        ]);
     }
+
+    $mission->markSucessful();
+}
 
     private function handleFailed(Mission $mission)
     {

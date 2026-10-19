@@ -75,3 +75,13 @@ if (heroSelect) {
         },
     });
 }
+
+document.addEventListener('submit', function (event) {
+    if (!event.target.matches('.remove-mission-form')) {
+        return;
+    }
+
+    if (!confirm('Are you sure you want to cancel this mission?')) {
+        event.preventDefault();
+    }
+});
