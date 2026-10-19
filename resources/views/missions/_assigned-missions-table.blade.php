@@ -48,18 +48,34 @@
                             </td>
 
                             <td class="px-6 py-4 text-right">
-                                <form action="{{ route('missions.complete', $mission) }}" method="POST">
-                                    @csrf
+                                <div class="flex justify-end gap-2">
+                                    <form action="{{ route('missions.complete', $mission) }}" method="POST">
+                                        @csrf
 
-                                    <button
-                                        type="submit"
-                                        class="rounded-xl bg-primary-500/80 px-2 py-1.5 text-xs font-semibold tracking-wide text-white transition hover:bg-primary-500"
-                                    >
-                                        <span class="[text-shadow:0.5px_0.5px_2px_rgb(79_54_68_/_70%)]">
-                                            Deploy
-                                        </span>
-                                    </button>
-                                </form>
+                                        <button
+                                            type="submit"
+                                            class="rounded-xl bg-primary-500/80 px-2 py-1.5 text-xs font-semibold tracking-wide text-white transition hover:bg-primary-500"
+                                        >
+                                            <span class="[text-shadow:0.5px_0.5px_2px_rgb(79_54_68_/_70%)]">
+                                                Deploy
+                                            </span>
+                                        </button>
+                                    </form>
+                                    <form method="POST" action="{{ route('missions.destroy', $mission) }}" class="remove-mission-form">
+                                        @csrf
+                                        @method('DELETE')
+
+
+                                        <button
+                                            type="submit"
+                                            class="rounded-xl bg-danger-500/80 px-2 py-1.5 text-xs font-semibold tracking-wide text-white transition hover:bg-danger-500"
+                                        >
+                                            <span class="[text-shadow:0.5px_0.5px_2px_rgb(79_54_68_/_70%)]">
+                                                Cancel
+                                            </span>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty
