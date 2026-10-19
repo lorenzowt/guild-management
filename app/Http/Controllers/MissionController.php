@@ -29,6 +29,7 @@ public function index()
                 MissionState::SUCCESSFUL->value,
                 MissionState::FAILED->value,
             ])
+            ->orderByDesc('created_at')
             ->paginate(5, ['*'], 'completed_page'),
 
         'quests' => Quest::orderBy('name')->get(),
