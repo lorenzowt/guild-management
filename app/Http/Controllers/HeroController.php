@@ -32,7 +32,8 @@ class HeroController extends Controller
         }
 
         return view('heroes.index', [
-            'heroes' => Hero::paginate(7),
+            'heroes' => Hero::where('status', '!=', HeroStatus::DEACTIVATED->value)
+                ->paginate(7),
             'editHero' => $editHero,
             'showHero' => $showHero,
         ]);
@@ -93,12 +94,19 @@ class HeroController extends Controller
      */
     public function destroy(Request $request, Hero $hero)
     {
-        $hero->delete();
+        if ($hero->status === HeroStatus::ON_MISSION) {
+            return redirect()
+                ->route('heroes.index', [
+                    'page' => $request->input('page'),
+                ])
+                ->with('error', 'You cannot deactivate a hero while they are on a mission.');
+        }
+
+        $hero->deactivate();
 
         return redirect()->route('heroes.index', [
             'page' => $request->input('page'),
         ]);
-
     }
 
     /**
