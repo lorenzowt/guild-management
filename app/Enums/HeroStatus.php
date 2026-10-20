@@ -7,6 +7,7 @@ enum HeroStatus: string
     case AVAILABLE = 'available';
     case ON_MISSION = 'on_mission';
     case INJURED = 'injured';
+    case DEACTIVATED = 'deactivated';
 
     public function label()
     {
@@ -14,6 +15,7 @@ enum HeroStatus: string
             self::AVAILABLE => 'Available',
             self::ON_MISSION => 'On Mission',
             self::INJURED => 'injured',
+            self::DEACTIVATED => 'deactivated',
         };
     }
 }
