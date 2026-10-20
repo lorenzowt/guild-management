@@ -62,4 +62,11 @@ class Hero extends Model
         return $this->belongsToMany(Mission::class);
     }
 
+    public function deactivate()
+    {
+        $this->update([
+            'status' => HeroStatus::DEACTIVATED,
+        ]);
+    }
+
 }

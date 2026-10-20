@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\MissionState;
 use App\Models\Hero;
 use App\Models\Mission;
+use App\Enums\HeroStatus;
 
 class GuildOverviewController extends Controller
 {
@@ -27,6 +28,7 @@ class GuildOverviewController extends Controller
             'successRate' => $successRate,
 
             'topHeroes' => Hero::query()
+                ->where('status', '!=', HeroStatus::DEACTIVATED->value)
                 ->withCount('missions')
                 ->orderByDesc('missions_count')
                 ->orderByDesc('level')
