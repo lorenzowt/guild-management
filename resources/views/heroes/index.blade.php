@@ -16,7 +16,7 @@
     <div class="pb-2 px-4 border-m border-b border-accent-500">
         <p class="text-text-400 text-sm">Hero Management</p>
     </div>
-    <div class="mx-auto min-w-6xl flex flex-col gap-6">
+    <div class="mx-auto flex w-full max-w-[90rem] min-w-0 flex-col gap-6">
         <div class="flex items-center justify-between gap-4 px-4">
             <div>
                 <h1 class="text-3xl font-bold tracking-tight text-text-500">
