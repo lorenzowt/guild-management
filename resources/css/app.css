@@ -215,72 +215,46 @@
     color: var(--color-primary-700);
 }
 
-/* Current numbered page on desktop */
+/* Current page in the desktop number list. */
 .hero-pagination nav span[aria-current="page"] > span {
     background-color: var(--color-primary-600);
     border-color: var(--color-primary-600);
     color: white;
 }
 
-/* Desktop pagination */
+/* Restore the original desktop pagination sizing. */
 .hero-pagination nav .shadow-sm {
-    box-shadow: none;
     background: transparent;
     border-radius: 0;
+    box-shadow: none;
 }
 
 .hero-pagination nav .shadow-sm > span > span,
 .hero-pagination nav .shadow-sm > span > a,
 .hero-pagination nav .shadow-sm > a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    width: 1.5rem;
-    height: 2rem;
     margin-left: 0.25rem;
-    padding: 0 !important;
+    padding: 0.4rem 0.65rem !important;
     border-radius: 0.5rem !important;
 }
 
-.hero-pagination nav a[rel="prev"],
-.hero-pagination nav a[rel="next"] {
-    width: 1.5rem;
-    height: 2rem;
-    padding: 0 !important;
-}
-
 .hero-pagination nav span[aria-disabled="true"] > span {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    width: 1.5rem;
-    height: 2rem;
-    padding: 0 !important;
-    background: transparent !important;
+    background-color: var(--color-accent-100);
     border-color: var(--color-accent-300);
     color: var(--color-text-300);
 }
 
-.hero-pagination nav a[rel="prev"] svg,
-.hero-pagination nav a[rel="next"] svg,
-.hero-pagination nav span[aria-disabled="true"] svg {
-    width: 0.875rem;
-    height: 0.875rem;
-    flex-shrink: 0;
-}
-
-/* Mobile Previous / Next buttons */
-.hero-pagination nav .sm\:hidden {
+/* Mobile: the Tailwind pagination view's first child is Previous / Next. */
+.hero-pagination nav > .sm\:hidden {
     display: flex;
     justify-content: space-between;
+    width: 100%;
     gap: 0.75rem;
 }
 
-.hero-pagination nav .sm\:hidden > a,
-.hero-pagination nav .sm\:hidden > span {
+.hero-pagination nav > .sm\:hidden > a,
+.hero-pagination nav > .sm\:hidden > span {
     display: inline-flex;
+    flex: 1 1 0;
     align-items: center;
     justify-content: center;
     min-height: 2.5rem;
@@ -293,14 +267,21 @@
     font-weight: 600;
 }
 
-.hero-pagination nav .sm\:hidden > a:hover {
+.hero-pagination nav > .sm\:hidden > a:hover {
     background-color: var(--color-primary-100);
     color: var(--color-primary-700);
 }
 
-.hero-pagination nav .sm\:hidden > span {
+.hero-pagination nav > .sm\:hidden > span {
     background-color: var(--color-accent-100);
     color: var(--color-text-300);
+}
+
+/* Do not let the mobile controls leak into the desktop pagination. */
+@media (min-width: 40rem) {
+    .hero-pagination nav > .sm\:hidden {
+        display: none;
+    }
 }
 
 /* Mission creation: Tom Select */
