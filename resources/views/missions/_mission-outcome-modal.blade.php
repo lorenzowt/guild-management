@@ -1,11 +1,11 @@
 <div
     id="mission-outcome-modal"
-    class="hidden fixed inset-0 z-50 bg-background-900/20 backdrop-blur-sm"
+    class="hidden fixed inset-0 z-50 overflow-y-auto bg-background-900/20 backdrop-blur-sm"
 >
-    <div class="flex min-h-full items-center justify-center p-6">
+    <div class="flex min-h-full items-start justify-center p-4 sm:items-center sm:p-6">
         <div
             id="mission-outcome-modal-content"
-            class="w-full max-w-2xl rounded-3xl bg-surface-500 p-8 shadow-2xl"
+            class="w-full max-w-2xl max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-3xl bg-surface-500 p-8 shadow-2xl sm:max-h-[calc(100dvh-3rem)]"
         >
             {{-- Modal heading --}}
             <div class="mb-8">
